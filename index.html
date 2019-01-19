@@ -2,23 +2,57 @@
 <html lang=en>
 	<title>Envelope Template</title>
 	<style>
+		html {
+			background-color: grey;
+		}
+		body {
+			background-color: white;
+			margin: 0;
+			padding: 0;
+/*			width: 11in;
+			height: 8.5in;
+*/			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		@page {
+			size: landscape;
+			margin: 0;
+		}
+		#front {
+			margin: 0;
+			padding: 0;
+			border: 0.66pt dotted black;
+/*			width: 9.5in;
+			height: 4.125in;
+			transform: rotate(-0.409646rad);
+*/		}
+		#stat {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
 		@media print {
-			div {
+			#stat {
 				display: none;
 			}
 		}
 	</style>
-<body style="margin:0;padding:0">
-	<div id="x"></div>
-	<div id="y"></div>
-	<div id="z"></div>
-	<svg width="11in" height="8.5in" style="position:absolute;top:0;left:0">
-		<rect id="o" x="0.5in" y="0.5in" width="10in" height="7.5in" fill="transparent" stroke="black" stroke-width="1" stroke-dasharray="1,3"/>
-		<line id="e1" x1="0.25in"  y1="4.25in" x2="8.9in"   y2="0.25in" stroke="black" stroke-width="1" stroke-dasharray="1,3"/>
-		<line id="e2" x1="8.9in"   y1="0.25in" x2="10.75in" y2="4.25in" stroke="black" stroke-width="1" stroke-dasharray="1,3"/>
-		<line id="e3" x1="10.75in" y1="4.25in" x2="2.1in"   y2="8.25in" stroke="black" stroke-width="1" stroke-dasharray="1,3"/>
-		<line id="e4" x1="2.1in"   y1="8.25in" x2="0.25in"  y2="4.25in" stroke="black" stroke-width="1" stroke-dasharray="1,3"/>
-	</svg>
+<body style="">
+	<div id="stat">
+		<div id="w"></div>
+		<div id="x"></div>
+		<div id="y"></div>
+		<div id="z"></div>
+		<svg width="11in" height="8.5in" style="position:absolute;top:0;left:0">
+			<rect id="o" x="0.5in" y="0.5in" width="10in" height="7.5in" fill="transparent" stroke="black" stroke-width="1" stroke-dasharray="1,3"/>
+			<line id="e1" x1="0.25in"  y1="4.25in" x2="8.9in"   y2="0.25in" stroke="black" stroke-width="1" stroke-dasharray="1,3"/>
+			<line id="e2" x1="8.9in"   y1="0.25in" x2="10.75in" y2="4.25in" stroke="black" stroke-width="1" stroke-dasharray="1,3"/>
+			<line id="e3" x1="10.75in" y1="4.25in" x2="2.1in"   y2="8.25in" stroke="black" stroke-width="1" stroke-dasharray="1,3"/>
+			<line id="e4" x1="2.1in"   y1="8.25in" x2="0.25in"  y2="4.25in" stroke="black" stroke-width="1" stroke-dasharray="1,3"/>
+		</svg>
+	</div>
+	<div id="front">hi</div>
 	<script>
 		var unit = "in";
 		var H = 11; // Page height
@@ -30,6 +64,18 @@
 		var ed = Math.sqrt(eh * eh + ew * ew); //Envelope diagonal
 		var mh = (H - ed) / 2; // Horizontal page margins to create the flaps overlap
 		var mw = W / 2 - eh * ew / ed; // Vertical page margins to create the flaps overlap
+
+		document.body.style.width = H + unit;
+		document.body.style.height = W + unit;
+		document.getElementById("front").style.width = eh + unit;
+		document.getElementById("front").style.height = ew + unit;
+		document.getElementById("front").style.transform = "rotate(-" + Math.asin(ew/ed) + "rad)";
+
+		document.getElementById("w").innerHTML = eh;
+		document.getElementById("x").innerHTML = ew;
+		document.getElementById("y").innerHTML = mh;
+		document.getElementById("z").innerHTML = mw;
+
 		var h = H - 2 * mh; // Page height without margins
 		var w = W - 2 * mw; // Page width without margins
 		var x = (h - Math.sqrt(h * h - w * w))/2; // Corner drop
@@ -37,10 +83,6 @@
 		var z = Math.sqrt(h * (h - x)); // Envelope long side
 		var x1 = 0 + mh + x;
 		var x2 = H - mh - x;
-
-		document.getElementById("x").innerHTML = x;
-		document.getElementById("y").innerHTML = y;
-		document.getElementById("z").innerHTML = z;
 
 		document.getElementById("o").setAttribute("x", mh * 2 + unit);
 		document.getElementById("o").setAttribute("y", mw * 2 + unit);
