@@ -55,17 +55,17 @@
 	<div id="front">hi</div>
 	<script>
 		var unit = "in";
-		var H = 11; // Page height
+		var pageHeight = 11; // Page height
 		var W = 8.5; // Page width
 		var o = 0.5; // Flaps overlap
 		var m = o / 2; // Page margins to create the flaps overlap
 		var eh = 9.5; // Envelope long side
 		var ew = 4.125; // Envelope short side
 		var ed = Math.sqrt(eh * eh + ew * ew); //Envelope diagonal
-		var mh = (H - ed) / 2; // Horizontal page margins to create the flaps overlap
+		var mh = (pageHeight - ed) / 2; // Horizontal page margins to create the flaps overlap
 		var mw = W / 2 - eh * ew / ed; // Vertical page margins to create the flaps overlap
 
-		document.body.style.width = H + unit;
+		document.body.style.width = pageHeight + unit;
 		document.body.style.height = W + unit;
 		document.getElementById("front").style.width = eh + unit;
 		document.getElementById("front").style.height = ew + unit;
@@ -76,17 +76,17 @@
 		document.getElementById("y").innerHTML = mh;
 		document.getElementById("z").innerHTML = mw;
 
-		var h = H - 2 * mh; // Page height without margins
+		var h = pageHeight - 2 * mh; // Page height without margins
 		var w = W - 2 * mw; // Page width without margins
 		var x = (h - Math.sqrt(h * h - w * w))/2; // Corner drop
 		var y = Math.sqrt(h * x); // Envelope short side
 		var z = Math.sqrt(h * (h - x)); // Envelope long side
 		var x1 = 0 + mh + x;
-		var x2 = H - mh - x;
+		var x2 = pageHeight - mh - x;
 
 		document.getElementById("o").setAttribute("x", mh * 2 + unit);
 		document.getElementById("o").setAttribute("y", mw * 2 + unit);
-		document.getElementById("o").setAttribute("width", H - mh * 4 + unit);
+		document.getElementById("o").setAttribute("width", pageHeight - mh * 4 + unit);
 		document.getElementById("o").setAttribute("height", W - mw * 4 + unit);
 
 		document.getElementById("e1").setAttribute("x1", mh + unit);
@@ -96,10 +96,10 @@
 
 		document.getElementById("e2").setAttribute("x1", x2 + unit);
 		document.getElementById("e2").setAttribute("y1", mw + unit);
-		document.getElementById("e2").setAttribute("x2", H - mh + unit);
+		document.getElementById("e2").setAttribute("x2", pageHeight - mh + unit);
 		document.getElementById("e2").setAttribute("y2", W / 2 + unit);
 
-		document.getElementById("e3").setAttribute("x1", H - mh + unit);
+		document.getElementById("e3").setAttribute("x1", pageHeight - mh + unit);
 		document.getElementById("e3").setAttribute("y1", W / 2 + unit);
 		document.getElementById("e3").setAttribute("x2", x1 + unit);
 		document.getElementById("e3").setAttribute("y2", W - mw + unit);
