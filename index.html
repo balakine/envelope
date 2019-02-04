@@ -46,6 +46,10 @@
 		<div id="z"></div>
 		<svg width="11in" height="8.5in" style="position:absolute;top:0;left:0">
 			<rect id="o" x="0.5in" y="0.5in" width="10in" height="7.5in" fill="transparent" stroke="black" stroke-width="1" stroke-dasharray="1,3"/>
+			<rect id="f1" x="0" y="0" width="11in" height="8.5in" fill="transparent" stroke="black" stroke-width="1pt" stroke-dasharray="1,3"/>
+			<rect id="f2" x="0" y="0" width="11in" height="8.5in" fill="transparent" stroke="black" stroke-width="1pt" stroke-dasharray="1,3"/>
+			<rect id="f3" x="0" y="0" width="11in" height="8.5in" fill="transparent" stroke="black" stroke-width="1pt" stroke-dasharray="1,3"/>
+			<rect id="f4" x="0" y="0" width="11in" height="8.5in" fill="transparent" stroke="black" stroke-width="1pt" stroke-dasharray="1,3"/>
 			<line id="e1" x1="0.25in"  y1="4.25in" x2="8.9in"   y2="0.25in" stroke="black" stroke-width="1" stroke-dasharray="1,3"/>
 			<line id="e2" x1="8.9in"   y1="0.25in" x2="10.75in" y2="4.25in" stroke="black" stroke-width="1" stroke-dasharray="1,3"/>
 			<line id="e3" x1="10.75in" y1="4.25in" x2="2.1in"   y2="8.25in" stroke="black" stroke-width="1" stroke-dasharray="1,3"/>
@@ -83,6 +87,18 @@
 		var z = Math.sqrt(h * (h - x)); // Envelope long side
 		var x1 = 0 + mh + x;
 		var x2 = pageHeight - mh - x;
+
+		document.getElementById("f1").style.transformOrigin = mh + unit + " " + (W / 2) + unit;
+		document.getElementById("f1").style.transform = "rotate3d(" + x + ", " + (W / 2 - mw) + ", 0, 180deg)";
+
+		document.getElementById("f2").style.transformOrigin = (pageHeight - mh) + unit + " " + (W / 2) + unit;
+		document.getElementById("f2").style.transform = "rotate3d(" + x + ", " + (W / 2 - mw) + ", 0, 180deg)";
+
+		document.getElementById("f3").style.transformOrigin = (pageHeight - mh) + unit + " " + (W / 2) + unit;
+		document.getElementById("f3").style.transform = "rotate3d(" + (W / 2 - mw) + ", -" + x + ", 0, 180deg)";
+
+		document.getElementById("f4").style.transformOrigin = mh + unit + " " + (W / 2) + unit;
+		document.getElementById("f4").style.transform = "rotate3d(" + (W / 2 - mw) + ", -" + x + ", 0, 180deg)";
 
 		document.getElementById("o").setAttribute("x", mh * 2 + unit);
 		document.getElementById("o").setAttribute("y", mw * 2 + unit);
